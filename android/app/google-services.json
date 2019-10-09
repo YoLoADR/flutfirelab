@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "789864832926",
+    "firebase_url": "https://flutfirelab.firebaseio.com",
+    "project_id": "flutfirelab",
+    "storage_bucket": "flutfirelab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789864832926:android:e4a51193c658521057008f",
+        "android_client_info": {
+          "package_name": "com.example.flutfirelab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789864832926-1bj7h4cvfqqf5oienqev7hn3opsvbk99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB8hUqwA_R3IMkA6PIRRuutgb7fxXypOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789864832926-1bj7h4cvfqqf5oienqev7hn3opsvbk99.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "789864832926-1lnddf3pieb9m3h43q8vi782v5isf3fd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutfirelab"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
