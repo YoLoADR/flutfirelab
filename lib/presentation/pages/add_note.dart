@@ -3,6 +3,11 @@ import 'package:flutfirelab/data/model/note.dart';
 import 'package:flutter/material.dart';
 
 class AddNotePage extends StatefulWidget {
+  // ajouter un paramètre
+  final Note note;
+  // constructor
+  const AddNotePage({Key key, this.note}) : super(key: key);
+
   @override
   _AddNotePageState createState() => _AddNotePageState();
 }
@@ -16,15 +21,19 @@ class _AddNotePageState extends State<AddNotePage> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: '');
-    _descriptionController = TextEditingController(text: '');
+    _titleController =
+        TextEditingController(text: isEditeNote ? widget.note.title : '');
+    _descriptionController =
+        TextEditingController(text: isEditeNote ? widget.note.description : '');
     _descriptionNode = FocusNode();
   }
+
+  get isEditeNote => widget.note != null;
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Note'),
+        title: Text(isEditeNote ? 'Update Note' : 'Add Note'),
       ),
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -35,14 +44,14 @@ class _AddNotePageState extends State<AddNotePage> {
               children: <Widget>[
                 TextFormField(
                   textInputAction: TextInputAction.next,
-                  onEditingComplete: (){
+                  onEditingComplete: () {
                     FocusScope.of(context).requestFocus(_descriptionNode);
                   },
                   controller: _titleController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Title can not be empty";
-                    } 
+                    }
                     return null;
                   },
                   decoration: InputDecoration(
@@ -69,13 +78,24 @@ class _AddNotePageState extends State<AddNotePage> {
                 RaisedButton(
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
-                  child: Text('Save'),
+                  child: Text(isEditeNote ? 'Update' : 'Save'),
                   onPressed: () async {
                     if (_key.currentState.validate()) {
                       try {
-                        await FirestoreService().addNote(Note(
-                            description: _descriptionController.text,
-                            title: _titleController.text));
+                        if (isEditeNote) {
+                          Note note = Note(
+                              description: _descriptionController.text,
+                              title: _titleController.text,
+                              id: widget.note.id
+                              );
+                          await FirestoreService().updateNote(note);
+                        } else {
+                          Note note = Note(
+                              description: _descriptionController.text,
+                              title: _titleController.text
+                              );
+                          await FirestoreService().addNote(note);
+                        }
                         Navigator.pop(context);
                       } catch (e) {
                         print(e);

@@ -35,4 +35,11 @@ class FirestoreService {
     .document(id)
     .delete();
   }
+
+  Future<void> updateNote(Note note){
+    return _db
+    .collection('note')
+    .document(note.id)
+    .updateData(note.toMap());
+  }
 }
