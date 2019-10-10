@@ -27,13 +27,7 @@ class HomePage extends StatelessWidget {
                   trailing: IconButton(
                     color: Colors.red,
                     icon: Icon(Icons.delete),
-                    onPressed: () async {
-                      try {
-                        FirestoreService().deleteNote(note.id);
-                      } catch(e){
-                         
-                      }
-                    },
+                    onPressed: ()=> _deleteNote(context,note.id),
                   ),
                   onTap: () => Navigator.push(
                     context,
@@ -55,5 +49,37 @@ class HomePage extends StatelessWidget {
           },
         ),
         );
+  }
+
+  void _deleteNote(BuildContext context,String id) async{
+    if(await _showConfirmationDialog(context)){
+      try {
+      await FirestoreService().deleteNote(id);
+      } catch(e){
+
+      }
+    }
+  }
+
+  Future <bool> _showConfirmationDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => AlertDialog(
+        content: Text("Are you sure you want to delete"),
+        actions: <Widget>[
+          FlatButton(
+            color: Colors.red,
+            textColor: Colors.white,
+            child: Text("Delete"),
+            onPressed: () => Navigator.pop(context, true),
+          ),
+          FlatButton(
+            child: Text("Cancel"),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+        ],
+      )
+    );
   }
 }
