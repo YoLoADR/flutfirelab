@@ -1,5 +1,6 @@
 import 'package:flutfirelab/data/firestore_service.dart';
 import 'package:flutfirelab/data/model/note.dart';
+import 'package:flutfirelab/presentation/pages/add_note.dart';
 import 'package:flutfirelab/presentation/pages/note_details.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,15 @@ class HomePage extends StatelessWidget {
               },
             );
           },
-        ));
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(
+              builder: (_)=> AddNotePage()
+            ));
+          },
+        ),
+        );
   }
 }

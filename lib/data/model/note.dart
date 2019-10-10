@@ -11,4 +11,11 @@ class Note {
     title = data["title"],
     description = data["description"],
     id = id;
+
+  Map<String, dynamic> toMap(){
+    return {
+      "title" : title,
+      "description" : description,
+    };
+  }
 }
