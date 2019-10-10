@@ -28,4 +28,11 @@ class FirestoreService {
     .collection('note')
     .add(note.toMap());
   }
+
+  Future<void> deleteNote(String id){
+    return _db
+    .collection('note')
+    .document(id)
+    .delete();
+  }
 }

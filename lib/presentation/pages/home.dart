@@ -24,6 +24,17 @@ class HomePage extends StatelessWidget {
                 return ListTile(
                   title: Text(note.title),
                   subtitle: Text(note.description),
+                  trailing: IconButton(
+                    color: Colors.red,
+                    icon: Icon(Icons.delete),
+                    onPressed: () async {
+                      try {
+                        FirestoreService().deleteNote(note.id);
+                      } catch(e){
+                         
+                      }
+                    },
+                  ),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
